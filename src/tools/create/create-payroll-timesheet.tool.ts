@@ -9,7 +9,8 @@ import { CreateXeroTool } from "../../helpers/create-xero-tool.js";
 const CreatePayrollTimesheetTool = CreateXeroTool(
   "create-timesheet",
   `Create a new payroll timesheet in Xero.
-Supports AU, NZ, and UK payroll regions. The organisation's region is auto-detected.`,
+Supports AU, NZ, and UK payroll regions. The organisation's region is auto-detected.
+IMPORTANT: For AU payroll, create the timesheet WITHOUT timesheetLines, then use add-timesheet-line to add lines one at a time. Passing lines at creation time creates separate rows per day in the UI instead of consolidating them by earnings rate.`,
   {
     payrollCalendarID: z.string().describe("The ID of the payroll calendar."),
     employeeID: z.string().describe("The ID of the employee."),
