@@ -8,6 +8,7 @@ import { EmployeeLeaveType as UkEmployeeLeaveType } from "xero-node/dist/gen/mod
 export interface EmployeeLeaveTypeResult {
   leaveTypeID?: string;
   scheduleOfAccrual?: string;
+  typeOfUnitsToAccrue?: string;
   unitsAccruedAnnually?: number;
   maximumToAccrue?: number;
   openingBalance?: number;
@@ -24,12 +25,17 @@ function mapLeaveType(
       ? t.unitsAccruedAnnually
       : (t as UkEmployeeLeaveType).hoursAccruedAnnually;
 
+  // UK only accrues in hours; NZ exposes typeOfUnitsToAccrue (e.g. "Hours", "Days").
+  const typeOfUnitsToAccrue =
+    "typeOfUnitsToAccrue" in t ? t.typeOfUnitsToAccrue : "Hours";
+
   return {
     leaveTypeID: t.leaveTypeID,
     scheduleOfAccrual:
       t.scheduleOfAccrual !== undefined
         ? String(t.scheduleOfAccrual)
         : undefined,
+    typeOfUnitsToAccrue,
     unitsAccruedAnnually,
     maximumToAccrue: t.maximumToAccrue,
     openingBalance: t.openingBalance,
