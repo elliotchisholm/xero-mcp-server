@@ -17,6 +17,7 @@ export interface EmployeeResult {
   startDate?: string;
   engagementType?: string;
   updatedDateUTC?: Date;
+  payrollCalendarID?: string;
 }
 
 function mapAuEmployee(e: AuEmployee): EmployeeResult {
@@ -30,6 +31,7 @@ function mapAuEmployee(e: AuEmployee): EmployeeResult {
     phoneNumber: e.phone,
     startDate: e.startDate,
     updatedDateUTC: e.updatedDateUTC,
+    payrollCalendarID: e.payrollCalendarID,
   };
 }
 

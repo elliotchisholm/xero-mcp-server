@@ -34,6 +34,7 @@ describe("listXeroPayrollEmployees", () => {
               lastName: "Anderson",
               email: "alice@example.com",
               phone: "+61 400 000 000",
+              payrollCalendarID: "cal-123",
             },
           ],
         },
@@ -47,6 +48,7 @@ describe("listXeroPayrollEmployees", () => {
       expect(result.isError).toBe(false);
       expect(result.result).toHaveLength(1);
       expect(result.result![0].phoneNumber).toBe("+61 400 000 000");
+      expect(result.result![0].payrollCalendarID).toBe("cal-123");
     });
   });
 
